@@ -23,29 +23,35 @@ contract ValueTypes {
 
     // Address types
     address public _address = 0x7A58c0Be72BE218B41C608b7Fe7C5bB630736C71;
-    address payable public _address1 = payable(_address); // Payable address for transfers
+    address payable public _address1;
     // Address members
-    uint256 public balance; // Will be set in constructor
+    uint256 public balance;
 
     // Fixed-size byte arrays
     bytes32 public _bytes32 = "MiniSolidity"; 
-    bytes1 public _byte = _bytes32[0]; // First byte
+    bytes1 public _byte;
 
     // Enumeration type
     enum ActionSet { Buy, Hold, Sell }
-    ActionSet public action = ActionSet.Buy; // Made public for visibility
+    ActionSet public action = ActionSet.Buy;
 
-    constructor() {
-        // Initialize balance in constructor to avoid gas costs on deployment
-        balance = _address1.balance;
+    constructor() payable {
+        // Initialize payable address safely
+        _address1 = payable(_address);
+        
+        // Initialize byte value
+        _byte = _bytes32[0];
+        
+        // Get balance - note: this will be 0 unless contract is funded
+        balance = address(this).balance;
     }
 
-    // Enum to uint conversion with explicit visibility
+    // Enum to uint conversion
     function enumToUint() external view returns (uint) {
         return uint(action);
     }
 
-    // Additional utility function to demonstrate address functionality
+    // Get balance of any address
     function getAddressBalance(address addr) external view returns (uint256) {
         return addr.balance;
     }
@@ -55,10 +61,33 @@ contract ValueTypes {
         action = newAction;
     }
 
-    // Function to demonstrate byte array manipulation
+    // Function to get byte at specific index with proper bounds checking
     function getByteAtIndex(uint8 index) external view returns (bytes1) {
-        require(index < 32, "Index out of bounds");
+        require(index < 32, "ValueTypes: index out of bounds");
         return _bytes32[index];
     }
-}
 
+    // Additional utility function to convert bytes32 to string
+    function bytes32ToString() external view returns (string memory) {
+        // Convert bytes32 to bytes memory first, then to string
+        bytes memory bytesArray = new bytes(32);
+        for (uint256 i = 0; i < 32; i++) {
+            bytesArray[i] = _bytes32[i];
+        }
+        return string(bytesArray);
+    }
+
+    // Function to receive Ether (makes contract payable)
+    receive() external payable {}
+
+    // Function to get contract balance
+    function getContractBalance() external view returns (uint256) {
+        return address(this).balance;
+    }
+
+    // Function to transfer Ether from contract (only owner for security)
+    function transferEther(address payable recipient, uint256 amount) external {
+        require(amount <= address(this).balance, "ValueTypes: insufficient balance");
+        recipient.transfer(amount);
+    }
+}

@@ -166,7 +166,8 @@ function minusPayable() external payable returns(uint256 balance) {
 ![mirror-image-2](https://images.mirror-media.xyz/publication-images/nGZ2pz0MvzgXuKrENJPYf.png?height=128&width=1130)
 
 ![3-2.png](./img/3-2.png)
-
+![3-2.png](./img/3-2.png)
+ 
 ## 总结
 
 在这一讲，我们介绍了 `Solidity` 中的函数。`pure` 和 `view` 关键字比较难理解，在其他语言中没出现过：`view` 函数可以读取状态变量，但不能改写；`pure` 函数既不能读取也不能改写状态变量。

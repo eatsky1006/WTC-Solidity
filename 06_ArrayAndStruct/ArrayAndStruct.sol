@@ -72,7 +72,7 @@ contract EnumTypes {
     // 创建enum变量 action
     ActionSet action = ActionSet.Buy;
 
-    // enum可以和uint显式的转换
+    // enum可以和uint显式的转换 //
     function enumToUint() external view returns(uint){
         return uint(action);
     }

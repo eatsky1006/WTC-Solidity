@@ -16,4 +16,5 @@ contract Mapping {
     function writeMap (uint _Key, address _Value) public{
         idToAddress[_Key] = _Value;
     }
+    function loadMap (){}
 }

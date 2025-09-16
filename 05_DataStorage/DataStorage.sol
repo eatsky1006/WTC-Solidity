@@ -100,6 +100,9 @@ contract Variables {
         assert(1 weeks == 604800);
         assert(1 weeks == 7 days);
         return 1 weeks;
+
+
+        
     }
 }
 

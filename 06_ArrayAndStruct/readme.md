@@ -158,10 +158,8 @@ function initStudent4() external {
 **Example:**
 
 ![6-5.png](./img/6-5.png)
-![6-5.png](./img/6-5.png)
-![6-5.png](./img/6-5.png)
-![6-5.png](./img/6-5.png)
-![6-5.png](./img/6-5.png)
+
+
 
 ## 总结
 

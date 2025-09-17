@@ -18,3 +18,5 @@ contract Mapping {
     }
     function loadMap (){}
 }
+--------
+fix

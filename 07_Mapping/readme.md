@@ -74,6 +74,7 @@ mapping(address => address) public swapPair; // 币对的映射，地址到地�
 - 映射示例 2 初始值
 
     ![7-2](./img/7-2.jpg)
+    ![7-2](./img/7-2.jpg) 
 
 - 映射示例 3 key-value pair
 

@@ -104,6 +104,8 @@ contract Overload {
 
     /**
      * @dev Example function with event logging (uint8 version)
+     * @param _in Input value
+     * @return out Output value
      */
     function processWithLog(uint8 _in) public returns (uint8 out) {
         out = _in;
@@ -112,6 +114,8 @@ contract Overload {
 
     /**
      * @dev Example function with event logging (uint256 version)
+     * @param _in Input value
+     * @return out Output value
      */
     function processWithLog(uint256 _in) public returns (uint256 out) {
         out = _in;
@@ -132,14 +136,60 @@ contract OverloadUsage {
 
     /**
      * @dev Demonstrate calling different overloaded functions
+     * @return defaultMessage Default message from saySomething()
+     * @return customMessage Custom message from saySomething(string)
+     * @return resultUint8 Result from f(uint8)
+     * @return resultUint256 Result from f(uint256)
      */
-    function demonstrateOverloading() public view returns (string memory, string memory, uint8, uint256) {
-        string memory defaultMessage = overloadContract.saySomething();
-        string memory customMessage = overloadContract.saySomething("Something custom");
+    function demonstrateOverloading() public view returns (
+        string memory defaultMessage,
+        string memory customMessage,
+        uint8 resultUint8,
+        uint256 resultUint256
+    ) {
+        defaultMessage = overloadContract.saySomething();
+        customMessage = overloadContract.saySomething("Something custom");
         
-        uint8 resultUint8 = overloadContract.f(uint8(42));
-        uint256 resultUint256 = overloadContract.f(uint256(1000));
-        
-        return (defaultMessage, customMessage, resultUint8, resultUint256);
+        resultUint8 = overloadContract.f(uint8(42));
+        resultUint256 = overloadContract.f(uint256(1000));
+    }
+
+    /**
+     * @dev Test string concatenation functions
+     * @return twoStrings Two strings concatenated
+     * @return threeStrings Three strings concatenated
+     */
+    function testConcatenation() public view returns (
+        string memory twoStrings,
+        string memory threeStrings
+    ) {
+        twoStrings = overloadContract.concatenate("Hello", " World");
+        threeStrings = overloadContract.concatenate("Hello", " Amazing", " World!");
+    }
+
+    /**
+     * @dev Test greeting functions
+     * @return defaultGreeting Default greeting
+     * @return personalizedGreeting Personalized greeting
+     */
+    function testGreetings() public view returns (
+        string memory defaultGreeting,
+        string memory personalizedGreeting
+    ) {
+        defaultGreeting = overloadContract.greet();
+        personalizedGreeting = overloadContract.greet("Alice");
+    }
+
+    /**
+     * @dev Test square functions with different types
+     * @return uintSquare Square of uint256
+     * @return intSquare Square of int256
+     */
+    function testSquares() public view returns (
+        uint256 uintSquare,
+        int256 intSquare
+    ) {
+        uintSquare = overloadContract.square(5);
+        intSquare = overloadContract.square(-5);
     }
 }

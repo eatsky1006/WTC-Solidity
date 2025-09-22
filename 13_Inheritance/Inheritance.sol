@@ -1,16 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 
-// 合约继承
+// Base contract
 contract Yeye {
     event Log(string msg);
 
-    // 定义3个function: hip(), pop(), yeye()，Log值为Yeye。
-    function hip() public virtual{
+    // Define 3 virtual functions
+    function hip() public virtual {
         emit Log("Yeye");
     }
 
-    function pop() public virtual{
+    function pop() public virtual {
         emit Log("Yeye");
     }
 
@@ -19,24 +19,26 @@ contract Yeye {
     }
 }
 
-contract Baba is Yeye{
-    // 继承两个function: hip()和pop()，输出改为Baba。
-    function hip() public virtual override{
+// First level inheritance
+contract Baba is Yeye {
+    // Override parent functions
+    function hip() public virtual override {
         emit Log("Baba");
     }
 
-    function pop() public virtual override{
+    function pop() public virtual override {
         emit Log("Baba");
     }
 
-    function baba() public virtual{
+    function baba() public virtual {
         emit Log("Baba");
     }
 }
 
-contract Erzi is Yeye, Baba{
-    // 继承两个function: hip()和pop()，输出改为Erzi。
-    function hip() public virtual override(Yeye, Baba){
+// Second level inheritance with multiple inheritance
+contract Erzi is Yeye, Baba {
+    // Resolve inheritance ambiguity with explicit override
+    function hip() public virtual override(Yeye, Baba) {
         emit Log("Erzi");
     }
 
@@ -44,27 +46,47 @@ contract Erzi is Yeye, Baba{
         emit Log("Erzi");
     }
 
-    function callParent() public{
+    // Call specific parent function
+    function callParent() public {
         Yeye.pop();
     }
 
-    function callParentSuper() public{
+    // Call parent function using super (will call the most derived version in the inheritance hierarchy)
+    function callParentSuper() public {
         super.pop();
     }
 }
 
-// 构造函数的继承
+// Constructor inheritance examples
 abstract contract A {
     uint public a;
+    string public name;
 
-    constructor(uint _a) {
+    constructor(uint _a, string memory _name) {
         a = _a;
+        name = _name;
     }
 }
 
-contract B is A(1) {
+// Direct inheritance with fixed constructor parameters
+contract B is A {
+    constructor() A(1, "ContractB") {}
 }
 
+// Flexible constructor inheritance
 contract C is A {
-    constructor(uint _c) A(_c * _c) {}
+    constructor(uint _c, string memory _name) A(_c * _c, _name) {}
+}
+
+// Additional example showing proper inheritance patterns
+contract GrandChild is Erzi {
+    function hip() public virtual override {
+        emit Log("GrandChild");
+        super.hip(); // Calls Erzi.hip()
+    }
+    
+    function pop() public virtual override {
+        emit Log("GrandChild");
+        super.pop(); // Calls Erzi.pop()
+    }
 }

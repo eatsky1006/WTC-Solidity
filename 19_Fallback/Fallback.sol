@@ -13,20 +13,25 @@ receive()存在?   fallback()
         / \
        是  否
       /     \
-receive()  fallback   
+receive()  fallback()   
     */
 
     // 定义事件
-    event receivedCalled(address Sender, uint Value);
-    event fallbackCalled(address Sender, uint Value, bytes Data);
+    event ReceivedCalled(address Sender, uint Value);
+    event FallbackCalled(address Sender, uint Value, bytes Data);
 
-    // 接收ETH时释放Received事件
+    // 接收ETH时释放ReceivedCalled事件
     receive() external payable {
-        emit receivedCalled(msg.sender, msg.value);
+        emit ReceivedCalled(msg.sender, msg.value);
     }
 
     // fallback
-    fallback() external payable{
-        emit fallbackCalled(msg.sender, msg.value, msg.data);
+    fallback() external payable {
+        emit FallbackCalled(msg.sender, msg.value, msg.data);
+    }
+    
+    // 辅助函数：获取合约余额
+    function getBalance() public view returns (uint) {
+        return address(this).balance;
     }
 }

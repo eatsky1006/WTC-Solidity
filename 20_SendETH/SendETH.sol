@@ -37,6 +37,11 @@ contract SendETH {
             revert CallFailed();
         }
     }
+    
+    // 获取合约余额
+    function getBalance() public view returns (uint256) {
+        return address(this).balance;
+    }
 }
 
 contract ReceiveETH {
@@ -49,7 +54,7 @@ contract ReceiveETH {
     }
     
     // 返回合约ETH余额
-    function getBalance() view public returns(uint) {
+    function getBalance() public view returns(uint) {
         return address(this).balance;
     }
 }

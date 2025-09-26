@@ -31,36 +31,7 @@ contract OtherContract {
 }
 
 contract CallContract {
-    // 添加事件记录重要操作
-    event CallOperation(address indexed target, address indexed caller, string operation, uint256 value);
-    
-    // 修复：参数命名规范，添加地址验证
-    function callSetX(address targetAddress, uint256 x) external {
-        require(targetAddress != address(0), "Invalid contract address");
-        require(targetAddress.code.length > 0, "Target is not a contract");
-        
-        OtherContract(targetAddress).setX(x);
-        emit CallOperation(targetAddress, msg.sender, "callSetX", 0);
-    }
 
-    // 修复：参数命名避免混淆
-    function callGetX(OtherContract targetContract) external view returns(uint x) {
-        x = targetContract.getX();
-    }
-
-    // 修复：参数命名规范，添加地址验证
-    function callGetX2(address targetAddress) external view returns(uint x) {
-        require(targetAddress != address(0), "Invalid contract address");
-        require(targetAddress.code.length > 0, "Target is not a contract");
-        
-        OtherContract oc = OtherContract(targetAddress);
-        x = oc.getX();
-    }
-
-    // 修复：添加安全检查
-    function setXTransferETH(address otherContract, uint256 x) external payable {
-        require(otherContract != address(0), "Invalid contract address");
-        require(otherContract.code.length > 0, "Target is not a contract");
         require(msg.value > 0, "ETH value must be greater than 0");
         
         OtherContract(otherContract).setX{value: msg.value}(x);
@@ -81,4 +52,12 @@ contract CallContract {
     function getContractBalance() external view returns(uint) {
         return address(this).balance;
     }
+    
+    // Added: Emergency function to withdraw any accidentally sent ETH
+    function withdraw() external {
+        payable(msg.sender).transfer(address(this).balance);
+    }
+    
+    // Added: Receive function to handle plain ETH transfers
+    receive() external payable {}
 }

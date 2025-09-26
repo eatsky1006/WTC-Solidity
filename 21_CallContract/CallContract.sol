@@ -25,30 +25,32 @@ contract OtherContract {
     function getX() external view returns(uint x){
         x = _x;
     }
+    
+    // 添加：接收ETH的函数
+    receive() external payable {}
 }
 
 contract CallContract {
-    // Fixed: Added explicit error handling
-    function callSetX(address _address, uint256 x) external {
-        OtherContract(_address).setX(x);
-    }
 
-    // Fixed: Parameter name changed to avoid shadowing
-    function callGetX(OtherContract otherContract) external view returns(uint x) {
-        x = otherContract.getX();
-    }
-
-    function callGetX2(address _address) external view returns(uint x) {
-        OtherContract oc = OtherContract(_address);
-        x = oc.getX();
-    }
-
-    // Fixed: Added proper access control and validation
-    function setXTransferETH(address otherContract, uint256 x) external payable {
-        require(otherContract != address(0), "Invalid contract address");
         require(msg.value > 0, "ETH value must be greater than 0");
         
         OtherContract(otherContract).setX{value: msg.value}(x);
+        emit CallOperation(otherContract, msg.sender, "setXTransferETH", msg.value);
+    }
+    
+    // 添加：安全提取函数（防止ETH被意外锁定）
+    function withdraw() external {
+        uint256 balance = address(this).balance;
+        require(balance > 0, "No ETH to withdraw");
+        payable(msg.sender).transfer(balance);
+    }
+    
+    // 添加：接收ETH的函数
+    receive() external payable {}
+    
+    // 添加：获取合约余额
+    function getContractBalance() external view returns(uint) {
+        return address(this).balance;
     }
     
     // Added: Emergency function to withdraw any accidentally sent ETH

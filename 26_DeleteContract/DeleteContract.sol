@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 
-// selfdestruct: 删除合约，并强制将合约剩余的ETH转入指定账户
 
 contract DeleteContract {
 
@@ -12,7 +11,6 @@ contract DeleteContract {
     receive() external payable {}
 
     function deleteContract() external {
-        // 调用selfdestruct销毁合约，并把剩余的ETH转给msg.sender
         selfdestruct(payable(msg.sender));
     }
 

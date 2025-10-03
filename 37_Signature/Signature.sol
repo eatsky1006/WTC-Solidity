@@ -3,7 +3,6 @@ pragma solidity ^0.8.21;
 
 import "../34_ERC721/ERC721.sol";
 
-// ECDSA库
 library ECDSA{
     /**
      * @dev 通过ECDSA，验证签名地址是否正确，如果正确则返回true

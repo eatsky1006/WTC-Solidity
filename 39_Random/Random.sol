@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.21;
 
 import "https://github.com/AmazingAng/WTF-Solidity/blob/main/34_ERC721/ERC721.sol";
@@ -106,4 +105,5 @@ contract Random is ERC721, VRFConsumerBaseV2{
         uint256 tokenId = pickRandomUniqueId(s_randomWords[0]); // 利用VRF返回的随机数生成tokenId
         _mint(sender, tokenId);
     }
+
 }

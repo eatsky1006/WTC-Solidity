@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-// wtf.academy
 pragma solidity ^0.8.21;
 
 // UUPS的Proxy，跟普通的proxy像。

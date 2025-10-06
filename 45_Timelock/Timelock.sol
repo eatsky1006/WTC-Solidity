@@ -2,9 +2,7 @@
 pragma solidity ^0.8.21;
 
 contract Timelock{
-    // 事件
-    // 交易取消事件
-    event CancelTransaction(bytes32 indexed txHash, address indexed target, uint value, string signature,  bytes data, uint executeTime);
+    // 交易取消事件    event CancelTransaction(bytes32 indexed txHash, address indexed target, uint value, string signature,  bytes data, uint executeTime);
     // 交易执行事件
     event ExecuteTransaction(bytes32 indexed txHash, address indexed target, uint value, string signature,  bytes data, uint executeTime);
     // 交易创建并进入队列 事件

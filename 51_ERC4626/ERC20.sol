@@ -23,7 +23,6 @@ contract ERC20 is IERC20 {
         symbol = symbol_;
     }
 
-    // @dev 实现`transfer`函数，代币转账逻辑
     function transfer(address recipient, uint amount) external override returns (bool) {
         balanceOf[msg.sender] -= amount;
         balanceOf[recipient] += amount;

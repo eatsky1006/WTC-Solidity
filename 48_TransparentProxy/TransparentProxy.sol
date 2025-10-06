@@ -2,7 +2,6 @@
 // wtf.academy
 pragma solidity ^0.8.21;
 
-// 选择器冲突的例子
 // 去掉注释后，合约不会通过编译，因为两个函数有着相同的选择器
 contract Foo {
     bytes4 public selector1 = bytes4(keccak256("burn(uint256)"));

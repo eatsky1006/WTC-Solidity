@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: MIT
 // author: @0xAA_Science from wtf.academy
 pragma solidity ^0.8.21;
 

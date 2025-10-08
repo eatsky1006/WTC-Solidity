@@ -6,7 +6,6 @@ import "../31_ERC20/IERC20.sol";
 import "../31_ERC20/ERC20.sol";
 
 /**
- * @dev ERC20代币时间锁合约。受益人在锁仓一段时间后才能取出代币。
  */
 contract TokenLocker {
 

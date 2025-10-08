@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-// wtf.academy
 pragma solidity ^0.8.0;
 
 import "../31_ERC20/ERC20.sol";

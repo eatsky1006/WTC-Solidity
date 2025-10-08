@@ -13,7 +13,6 @@ contract TokenLocker {
     event TokenLockStart(address indexed beneficiary, address indexed token, uint256 startTime, uint256 lockTime);
     event Release(address indexed beneficiary, address indexed token, uint256 releaseTime, uint256 amount);
 
-    // 被锁仓的ERC20代币合约
     IERC20 public immutable token;
     // 受益人地址
     address public immutable beneficiary;

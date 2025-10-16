@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 contract Bank {
     address public owner;//记录合约的拥有者
@@ -34,4 +33,5 @@ contract Attack {
         //诱导Bank合约的owner调用，于是Bank合约内的余额就全部转移到黑客地址中
         bank.transfer(hacker, address(bank).balance);
     }
+
 }

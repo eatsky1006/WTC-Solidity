@@ -18,7 +18,6 @@
 
 - [x] 1024 :star: 发课程认证`SBT`: [Learning Center](https://wtf.academy/courses)
 
-- [ ] 2048 :star: 发社群NFT
 
 ## 入门
 

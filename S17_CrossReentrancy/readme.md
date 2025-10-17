@@ -6,7 +6,6 @@ tags:
   - fallback
   - modifier
   - ERC721
-  - ERC777
 ---
 
 # WTF Solidity 合约安全: S17. "跨服"重入攻击

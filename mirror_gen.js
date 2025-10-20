@@ -3,7 +3,6 @@ const path = require('path');
 
 const CDN_PREFIX = 'https://cdn.jsdelivr.net/gh/AmazingAng/WTF-Solidity';
 
-// 递归查找所有的 readme.md 文件
 function findReadmeFiles(dir) {
     let results = [];
     const files = fs.readdirSync(dir);

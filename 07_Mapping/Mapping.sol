@@ -1,6 +1,6 @@
 pragma solidity ^0.8.21;
 contract Mapping {
-    mapping(uint => address) public idToAddress; // id映射到地址
+    mapping(uint => address) public idToAddress; // 
     mapping(address => address) public swapPair; // 币对的映射，地址到地址
     
     // 规则1. _KeyType 不能是自定义的, 下面这个例子会报错

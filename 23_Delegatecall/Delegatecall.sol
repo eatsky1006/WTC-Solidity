@@ -134,3 +134,4 @@ contract B {
         return (num, sender, owner, paused);
     }
 }
+///

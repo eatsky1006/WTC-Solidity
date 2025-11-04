@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: MIT
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "../34_ERC721/ERC721.sol";
